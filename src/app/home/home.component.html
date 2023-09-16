@@ -1,0 +1,46 @@
+<div class="hero">
+    <div class="container">
+        <form (submit)="$event.preventDefault();" action="#" class="find-location">
+            <input type="text" #textInput placeholder="Find your location..." value={{searchValue}}  (input)="textInput.value.length > 5 && getLatLong(textInput.value)">
+            <div class="card">
+            <div class="search" *ngIf="cordinateData && cordinateData.length > 0">
+                <div *ngFor="let cord of cordinateData" tappable (click)="selectLatLong(cord)" class="search-result">
+                    {{cord.name}},{{cord.state}}, {{cord.country}} (Lat:{{cord.lat}}, Long: {{cord.lon}})
+                </div>
+            </div>
+            <p class="search" *ngIf="cordinateData && cordinateData.length <= 0">No Data found</p>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="forecast-table">
+    <div class="container">
+        <div class="forecast-container">
+            <div class="today forecast" *ngIf="weatherData">
+                <div class="forecast-header">
+                    <div class="day">{{weatherData && Moment(weatherData.dt).format('dddd')}}</div>
+                    <div class="date">{{weatherData && Moment(weatherData.dt).format('D MMM')}}</div>
+                </div> <!-- .forecast-header -->
+                <div class="forecast-content">
+                    <div class="location">{{weatherData && weatherData.name}}</div>
+                    <div class="degree">
+                        <div class="num">{{weatherData && math.round(weatherData.main.temp - 273.15) }}<sup>o</sup>C</div>
+                        <div class="forecast-icon">
+                            <img src="https://openweathermap.org/img/wn/{{weatherData && weatherData.weather[0].icon}}@2x.png" alt="" width=90>
+                        </div>
+                    </div>
+                    <span><img src="../../assets/images/icon-wind.png" alt="Wind Speed">{{weatherData && weatherData.wind.speed}}m/s</span>
+                    <span><img src="../../assets/images/icons8-humidity-48.png" alt="Humidity">{{weatherData && weatherData.main.humidity}}%</span>
+                    <span><img src="../../assets/images/icons8-sunrise-48.png" alt="">{{weatherData && Moment(weatherData.sys.sunrise).format('h:mm:ss a')}}</span>
+                    <span><img src="../../assets/images/icons8-sunset-48.png" alt="">{{weatherData && Moment(weatherData.sys.sunset).format('h:mm:ss a')}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="forecast-table">
+    <div class="container">
+        <app-weather-history [previousData]="getSearchedValue()" (getCordinateChange)="selectLatLong($event)"></app-weather-history>
+    </div>
+</div>

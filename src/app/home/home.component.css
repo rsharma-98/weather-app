@@ -1,0 +1,18 @@
+.hero {
+    background-image: url('../../assets//images/banner@2x.png');
+}
+
+.search {
+    position: absolute;
+    background: white;
+    width: 100%;
+    color: black;
+    border-radius: 28px;
+    padding: 9px;
+}
+
+.search-result {
+    border: 1px solid black;
+    padding: 9px;
+    cursor: pointer;
+}

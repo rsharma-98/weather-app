@@ -1,0 +1,15 @@
+
+.search {
+    position: relative;
+    background: white;
+    width: 100%;
+    color: black;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.search-result {
+    border: 1px solid black;
+    padding: 9px;
+    cursor: pointer;
+}

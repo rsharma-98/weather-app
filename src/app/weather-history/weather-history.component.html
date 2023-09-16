@@ -1,0 +1,7 @@
+<button class="button" type="button" (click)="showWheatherHistory()">{{showHistory === false ? 'Show' : 'Hide'}} Previous Searched</button>
+
+<div class="search" *ngIf="previousData && previousData.length > 0 && showHistory">
+    <div *ngFor="let cord of previousData" tappable (click)="selectLatLong(cord)" class="search-result">
+        {{cord.name}},{{cord.state}}, {{cord.country}} (Lat:{{cord.lat}}, Long: {{cord.lon}})
+    </div>
+</div>
